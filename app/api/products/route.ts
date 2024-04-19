@@ -1,13 +1,14 @@
+import { Products } from "@/app/(products)/_components/products";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<NextResponse<Products>> {
   const result = [
     {
-      id: "iPhone 13",
+      name: "iPhone 13",
       price: 1800,
     },
     {
-      id: "Samsung Galaxy S21",
+      name: "Samsung Galaxy S21",
       price: 1200,
     },
   ];

@@ -4,17 +4,17 @@ import { useEffect, useState } from "react";
 import { ProductLine } from "./product-line";
 import { z } from "zod";
 
-const productSchema = z.array(
+const productsSchema = z.array(
   z.object({
     name: z.string(),
     price: z.number(),
   })
 );
 
-type ProductType = z.infer<typeof productSchema>;
+export type Products = z.infer<typeof productsSchema>;
 
 export const Products = () => {
-  const [products, setProducts] = useState<ProductType>();
+  const [products, setProducts] = useState<Products>();
   const [isError, setIsError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -22,9 +22,9 @@ export const Products = () => {
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => {
-        const validatedProduct = productSchema.safeParse(data);
+        const validatedProduct = productsSchema.safeParse(data);
         if (!validatedProduct.success) {
-          console.error("Invalid product data");
+          console.error("Invalid product data", validatedProduct.error);
           setIsError(true);
         } else {
           setProducts([...validatedProduct.data]);
