@@ -15,15 +15,15 @@ export async function GET(
   return NextResponse.json(results);
 }
 
-export async function POST(request: NextRequest) {
-  const body: unknown = await request.json();
+// export async function POST(request: NextRequest) {
+//   const body: unknown = await request.json();
 
-  const validatedRequestBody = productFormSchema.safeParse(body);
-  if (!validatedRequestBody.success) {
-    return NextResponse.json(validatedRequestBody.error, { status: 400 });
-  }
+//   const validatedRequestBody = productFormSchema.safeParse(body);
+//   if (!validatedRequestBody.success) {
+//     return NextResponse.json(validatedRequestBody.error, { status: 400 });
+//   }
 
-  await insertProduct(validatedRequestBody.data);
+//   await insertProduct(validatedRequestBody.data);
 
-  return NextResponse.json({ message: "Success" }, { status: 201 });
-}
+//   return NextResponse.json({ message: "Success" }, { status: 201 });
+// }

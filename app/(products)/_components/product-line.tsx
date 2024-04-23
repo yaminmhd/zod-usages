@@ -1,5 +1,3 @@
-"use client";
-
 type ProductLine = {
   name: string;
   price: number;

@@ -5,12 +5,10 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productFormSchema } from "@/lib/schema-validation";
 import { addProduct } from "../(actions)/add-product";
-import { useRouter } from "next/navigation";
 
 export type ProductForm = z.infer<typeof productFormSchema>;
 
 export const ProductForm = () => {
-  const router = useRouter();
   const {
     register,
     formState: { errors },
@@ -22,9 +20,7 @@ export const ProductForm = () => {
     <div className="flex flex-col gap-y-5">
       <p className="text-4xl underline ">Create a Product</p>
       <form
-        action={async (e) => {
-          await addProduct(e);
-        }}
+        action={addProduct}
         className="flex flex-col gap-y-5 w-auto p-4 rounded bg-slate-800"
       >
         <input

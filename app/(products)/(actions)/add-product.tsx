@@ -2,6 +2,7 @@
 
 import { insertProduct } from "@/app/db/productRepository";
 import { productFormSchema } from "@/lib/schema-validation";
+import { revalidatePath } from "next/cache";
 
 export async function addProduct(data: FormData) {
   const formData = Object.fromEntries(data);
@@ -11,4 +12,5 @@ export async function addProduct(data: FormData) {
   }
 
   await insertProduct(parsed.data);
+  revalidatePath("/(products)");
 }
