@@ -38,7 +38,7 @@ export const Products = () => {
   }
 
   return (
-    <div className="flex flex-col justify-between h-32">
+    <div className="flex flex-col">
       <p className="text-4xl underline ">Products</p>
       {isLoading && <p>Loading...</p>}
       <div>

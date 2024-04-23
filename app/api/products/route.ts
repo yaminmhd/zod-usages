@@ -1,30 +1,29 @@
 import { Products } from "@/app/(products)/_components/products";
+import { getProducts, insertProduct } from "@/app/db/product";
 import { productFormSchema } from "@/lib/schema-validation";
-import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request): Promise<NextResponse<Products>> {
-  const result = [
-    {
-      name: "iPhone 13",
-      price: 1800,
-    },
-    {
-      name: "Samsung Galaxy S21",
-      price: 1200,
-    },
-  ];
+export async function GET(
+  request: NextRequest
+): Promise<NextResponse<Products>> {
+  const results = await getProducts();
 
-  return NextResponse.json(result);
+  const path = request.nextUrl.searchParams.get("path") || "/";
+
+  revalidatePath(path);
+  return NextResponse.json(results);
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   const body: unknown = await request.json();
 
   const validatedRequestBody = productFormSchema.safeParse(body);
-
   if (!validatedRequestBody.success) {
     return NextResponse.json(validatedRequestBody.error, { status: 400 });
   }
+
+  await insertProduct(validatedRequestBody.data);
 
   return NextResponse.json({ message: "Success" }, { status: 201 });
 }

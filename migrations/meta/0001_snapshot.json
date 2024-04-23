@@ -1,6 +1,6 @@
 {
-  "id": "52de25a1-c8b8-4e20-a588-00019a82a54a",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "9d2b7720-c5dd-4ea1-b85f-69a24c447ea3",
+  "prevId": "52de25a1-c8b8-4e20-a588-00019a82a54a",
   "version": "5",
   "dialect": "pg",
   "tables": {
@@ -38,7 +38,7 @@
         "unique_idx": {
           "name": "unique_idx",
           "columns": [
-            "name"
+            "id"
           ],
           "isUnique": true
         }

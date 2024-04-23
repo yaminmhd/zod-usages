@@ -1,4 +1,5 @@
 import {
+  integer,
   pgTable,
   serial,
   text,
@@ -12,24 +13,12 @@ export const products = pgTable(
   {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
-    price: text("price").notNull(),
+    price: integer("price").notNull(),
     createdAt: timestamp("createdAt").defaultNow().notNull(),
   },
   (products) => {
     return {
-      uniqueIdx: uniqueIndex("unique_idx").on(products.name),
+      uniqueIdx: uniqueIndex("unique_idx").on(products.id),
     };
   }
 );
-
-// export type Product = typeof products.$inferSelect; // return type when queried
-// export type NewProduct = typeof products.$inferInsert; // insert type
-
-// export async function getProducts() {
-//   const selectResult = await db.select().from(products);
-//   console.log("Results", selectResult);
-// };
-
-// export async function insertProduct(products: NewProduct): Promise<Product[]> {
-//   return db.insert(users).values(user).returning();
-// }
