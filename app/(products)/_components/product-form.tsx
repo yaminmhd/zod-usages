@@ -4,9 +4,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { productFormSchema } from "@/lib/schema-validation";
-import { addProduct } from "../../db/add-product";
+import { addProduct } from "../(actions)/add-product";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 export type ProductForm = z.infer<typeof productFormSchema>;
 
@@ -14,18 +13,10 @@ export const ProductForm = () => {
   const router = useRouter();
   const {
     register,
-    // handleSubmit,
     formState: { errors },
   } = useForm<ProductForm>({
     resolver: zodResolver(productFormSchema),
   });
-
-  // const onSubmit = (data: ProductForm) => {
-  //   fetch("/api/products", {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //   }).then(() => router.refresh());
-  // };
 
   return (
     <div className="flex flex-col gap-y-5">
@@ -34,7 +25,6 @@ export const ProductForm = () => {
         action={async (e) => {
           await addProduct(e);
         }}
-        // onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-y-5 w-auto p-4 rounded bg-slate-800"
       >
         <input

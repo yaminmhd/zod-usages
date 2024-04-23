@@ -1,5 +1,5 @@
 import { Products } from "@/app/(products)/_components/products";
-import { getProducts, insertProduct } from "@/app/db/product";
+import { getProducts, insertProduct } from "@/app/db/productRepository";
 import { productFormSchema } from "@/lib/schema-validation";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
