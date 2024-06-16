@@ -20,7 +20,7 @@
 
 ## Running locally
 
-1. `cp .env.example env.local`
+1. `cp .env.example .env.local`
 2. Populate the values `DATABASE_URL`, `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB`
 3. `docker-compose --env-file .env.local up` to spin up postgres db container
 4. `npm run migration:push` to push migration files into local postgres db container
